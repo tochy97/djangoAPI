@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/index.css' %}"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <object
+      class="wfull"
+      type="text/html"
+      data="{% static 'html/components/Nav/Nav.html' %}"
+    />
+    <object
+      class="wfull"
+      type="text/html"
+      data="{% static 'html/components/Footer/Footer.html' %}"
+    />
+  </body>
+</html>
