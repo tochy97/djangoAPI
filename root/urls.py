@@ -6,6 +6,8 @@ from .views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('cjAPI/', include('cjAPI.urls')),
+    path('okechAPI/', include('okechAPI.urls')),
     path("", home, name="home"),
     path('auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
