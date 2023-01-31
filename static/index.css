@@ -2,6 +2,21 @@ body {
     margin: 0;
 }
 
-.wfull {
+iframe {
+    position:fixed;
     width: 100%;
+}
+.top {
+    top:0;
+    height: 10%;
+}
+
+.center {
+    top: 10%;
+    height: 75%;
+}
+
+.bottom {
+    top: 90%;
+    height: 10%;
 }
