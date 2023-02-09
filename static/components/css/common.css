@@ -5,6 +5,11 @@ form {
     display: flex;
     flex-wrap: wrap;
 }
+
+form:focus {
+    border: 3px solid #00afe4;
+}
+
 textarea,
 input[type=text],
 input[type=email],
@@ -17,6 +22,14 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+textarea:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=text]:focus {
+    border: 2px solid #00afe4;
+    outline: 0;
+}
+
 button {
     background-color: #00afe4;
     color: white;
@@ -24,7 +37,7 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: auto;
+    width: 100%;
 }
 
 button:hover {

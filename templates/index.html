@@ -3,21 +3,22 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'Nav.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'Footer.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'components/css/index.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'components/css/Nav.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'components/css/Footer.css' %}" type="text/css" />
     </head>
-    <script src="{% static 'jquery.js' %}"></script>
-    <script src="{% static 'index.js' %}"></script>
-    <body>
+    <script src="{% static 'components/js/jquery.js' %}"></script>
+    <script src="{% static 'components/js/index.js' %}"></script>
+    <script src="{% static 'components/js/Nav.js' %}"></script>
+    <body onload="loadComponents()">
         <div class="top nav">
             <a onclick="loadPage('')" class="active">Tochy</a>
-            {% comment %} <a onclick="loadPage('Contact')">Contact</a> {% endcomment %}
+            {% comment %} <a onclick="loadPage('Login')">Login</a> {% endcomment %}
+            <a onclick="toContact()">Contact</a>
             {% comment %} <a onclick="loadPage('About')">About</a> {% endcomment %}
-            <a onclick="loadPage('Login')">Login</a>
             {% comment %} <a onclick="loadPage('Register')">Register</a> {% endcomment %}
         </div>
-        <object id="Content" class="center" type="text/html" data="{% static 'pages/About/About.html' %}" ></object>
+        <iframe id="Content" class="center" type="text/html" frameBorder="0" src="{% static 'pages/About/About.html' %}" height="83%" width="100%"></iframe>
         <div class="footer">
           <p>tochyegeonu.com</p>
         </div>
