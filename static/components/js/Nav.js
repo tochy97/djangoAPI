@@ -1,3 +1,4 @@
+
 function toContact(){
     var content = document.getElementById("Content");
     var contact = content.contentWindow.document.getElementById("Contact");
@@ -5,6 +6,12 @@ function toContact(){
     var form = content.contentWindow.document.getElementById("contactForm");
     contact.scrollIntoView();
     email.focus();
+}
+
+function createCalender(){
+    var getPast = require("../CalenderApp/getPast");
+    var calender = getPast();
+    console.log(calender)
 }
 
 function loadPage(name) {

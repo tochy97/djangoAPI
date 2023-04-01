@@ -5,8 +5,13 @@ from django.contrib.auth.models import User
 
 class Data(models.Model):
     id = models.IntegerField(primary_key=True)
-    text = models.CharField(max_length=225)
+    text = models.CharField(max_length=255)
 
+
+class Quote(models.Model):
+    id = models.IntegerField(primary_key=True)
+    origin = models.CharField(max_length=50)
+    text = models.CharField(max_length=255)
 
 class Day(models.Model):
     id = models.IntegerField(primary_key=True)

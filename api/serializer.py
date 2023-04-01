@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils.translation import gettext_lazy as _
-from .models import Post, Day, Data
+from .models import Post, Day, Data, Quote
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,6 +19,12 @@ class UserSerializer(serializers.ModelSerializer):
             'id'
         ]
 
+
+class QuoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Quote
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
 
