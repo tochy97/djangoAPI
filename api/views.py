@@ -11,7 +11,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
-
 from .models import Post, Day, Data, Quote
 from .serializer import UserSerializer, UserSerializerWithToken, PostSerializer, DaySerializer, DataSerializer, QuoteSerializer
 
