@@ -3,24 +3,16 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="{% static 'components/css/index.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'components/css/Nav.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'components/css/Footer.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'components/common/index.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'components/common/common.css' %}" type="text/css" />
     </head>
-    <body>
-    <script src="{% static 'components/js/jquery.js' %}"></script>
-    <script src="{% static 'components/js/index.js' %}"></script>
-    <script src="{% static 'components/js/Nav.js' %}"></script>
-        <div class="top nav">
-            <a onclick="loadPage('')" class="active">Tochy</a>
-            {% comment %} <a onclick="loadPage('Login')">Login</a> {% endcomment %}
-            <a onclick="toContact()">Contact</a>
-            {% comment %} <a onclick="loadPage('About')">About</a> {% endcomment %}
-            {% comment %} <a onclick="loadPage('Register')">Register</a> {% endcomment %}
-        </div>
-        <iframe id="Content" class="center" type="text/html" frameBorder="0" src="{% static 'pages/About/About.html' %}" height="83%" width="100%"></iframe>
-        <div class="footer">
-          <p>tochyegeonu.com</p>
-        </div>
+    <body onload="StartApp()">
+        <form name="main">
+            <div name="container">
+                <div id="nav" class="nav"></div>
+                <div id="content" class="content"></div>
+            </div>
+        </form>
+        <script src="{% static 'components/common/index.js' %}"></script>
     </body>
 </html>

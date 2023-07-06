@@ -1,0 +1,21 @@
+fieldset {
+    all: unset;
+}
+
+object {
+    all: unset;
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    text-align: center;
+    width: inherit;
+}
+
+input[type=text], input[type=password] {
+    all: unset;
+    padding: 7px;
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 5px;
+}

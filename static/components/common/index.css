@@ -1,0 +1,23 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+
+object {
+    display: none;
+}
+
+.nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-width: 20%;
+}
+
+.content {
+    position: absolute;
+    top: 15px;
+    left: 75px;
+    width: 80%;
+}

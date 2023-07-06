@@ -6,9 +6,9 @@ from .views import home, current_user, modify_user, send_email
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('cjAPI/', include('cjAPI.urls')),
-    path('okechAPI/', include('okechAPI.urls')),
     path("", home, name="home"),
+    path("login", home, name="home"),
+    path("register", home, name="home"),
     path('auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),

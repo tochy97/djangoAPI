@@ -49,12 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt',
     'corsheaders',
     'rest_framework',
     'api',
-    'okechAPI',
-    'cjAPI',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -89,8 +86,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     # location of your application, should not be public web accessible
     BASE_DIR / 'static',
-    BASE_DIR / 'cjAPI/static',
-    BASE_DIR / 'okechAPI/static',
 )
 
 # List of finder classes that know how to find static files in
