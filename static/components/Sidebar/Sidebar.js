@@ -1,43 +1,45 @@
-function StartSidebar ()
+async function openPage (event)
 {
-    let self = document.forms.sidebar;
-
-    let loggedIn = false;
-console.log("test")
-    self.isVisible = false;
-    self.initialized = false;
-
-    let toggle = self.elements.toggle;
-    let sidebar = self.elements.sidebar;
-
-    self.initialized = true;
-}
-
-function addOption (option, link)
-{
-    let self = document.forms.sidebar;
-
-    let sidebar = self.elements.sidebar;
+    var page = event.target.innerHTML;
+    await loadContent("pages", page, "content")
 }
 
 function openSidebar ()
 {
-    let self = document.forms.main;
+    let form = document.forms.main;
 
-    let sidebar = self.elements.sidebar;
-    let toggle = self.elements.toggle;
+    let sidebar = form.elements.sidebar;
+    let toggle = form.elements.toggle;
 
     sidebar.style.width = "20%";
+    sidebar.style.pointerEvent = "auto";
     toggle.style.visibility = "hidden";
+
+    let options = document.querySelectorAll('a');
+
+    for (var i = 0; i < options.length; i++) {
+        options[i].style.visibility = "visible";
+        if (i > 0)
+        {
+            options[i].addEventListener('click', openPage);
+        }
+    }
 }
 
 function closeSidebar ()
 {
-    let self = document.forms.main;
+    let form = document.forms.main;
 
-    let sidebar = self.elements.sidebar;
-    let toggle = self.elements.toggle;
+    let sidebar = form.elements.sidebar;
+    let toggle = form.elements.toggle;
 
     sidebar.style.width = "0px";
+    sidebar.style.pointerEvent = "none";
     toggle.style.visibility = "visible";
+
+    let options = document.querySelectorAll('a');
+
+    for (var i = 0; i < options.length; i++) {
+        options[i].style.visibility = "hidden";
+    }
 }

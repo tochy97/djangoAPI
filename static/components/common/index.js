@@ -5,7 +5,8 @@ async function StartApp()
     let self =  document.forms.main;
 
     // load in sidebar
-    let sidebar = await loadContent( url("components", "Sidebar"), "nav", "StartSidebar()" );
+    let sidebar = await loadContent( "components", "Sidebar", "nav");
+    StartSidebar();
 
     // load in content
     let content;
@@ -14,29 +15,30 @@ async function StartApp()
         case "/":
         case "/login":
         case "/Login":
-            content = await loadContent( url("pages", "Login"), "content" );
+            content = await loadContent( "pages", "Login", "content" );
             break;
         case "/register":
         case "/Register":
-            content = await loadContent( url("pages", "Register"), "content" );
+            content = await loadContent( "pages", "Register", "content" );
     }
+    
 }
 
-async function loadContent ( url, container, callback )
+async function loadContent ( dir, name, container )
 {
-    let htmlSrc = url + ".html";
+    let htmlSrc = url(dir, name) + ".html";
 
     let content = document.getElementById(container);
 
     // load html as text into content
     content.innerHTML = await (await fetch(htmlSrc)).text();
     // load script
-    content.scriptSrc = loadScript( url, callback );
+    content.scriptSrc = loadScript( url(dir, name) );
 
     return content;
 }
 
-function loadScript ( url, callback )
+function loadScript ( url )
 {
     let scriptSrc = url + ".js";
     // create script and set type
@@ -45,27 +47,16 @@ function loadScript ( url, callback )
     
     // set src
     script.setAttribute("src", scriptSrc);
-    document.body.appendChild(script);
+    document.body.prepend(script);
 
-    // if it loads execute callback and return the element
+    // if it loads and return the element
     script.addEventListener("load", () => {
-        executeString(callback);
-        return script;
+        script.onreadystatechange = function () {
+            return script;
+        }
     });
-    
+
     script.addEventListener("error", () => {
         return null;
     });
-}
-
-function executeString (exec)
-{
-    // function we want to run
-    var fnstring = exec;
-
-    // find object
-    var fn = window[fnstring];
-
-    // run if object is a function
-    if (typeof fn === "function") fn();
 }
