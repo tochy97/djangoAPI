@@ -1,3 +1,21 @@
+document.addEventListener("click", (event) => {
+    let form = document.forms.main
+    let sidebar = form.elements.sidebar;
+    let toggle = form.elements.toggle;
+
+    let eventTarget = event.target; // clicked element    
+
+    do {
+      if(eventTarget == sidebar || eventTarget == toggle) {
+        // This is a click inside, does nothing, just return.
+        return;
+      }
+      // Go up the DOM
+        eventTarget = eventTarget.parentNode;
+    } while (eventTarget);
+        // This is a click outside.      
+        closeSidebar();
+})
 async function openPage (event)
 {
     var page = event.target.innerHTML;
