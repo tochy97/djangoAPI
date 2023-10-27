@@ -2,34 +2,24 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/static/components/common/common.css" type="text/css" />
     <link rel="stylesheet" href="/static/pages/Login/Login.css" type="text/css" />
   </head>
   <body>
     <div class="container">
       <h1>Login</h1>
+      <hr/>
       <form action="/action_page.php" method="post">
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="uname"
-            autofocus
-            required
-          />
-
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            required
-          />
-          <div class="inner">
+          <div class="inputBox">
+            <input type="text" placeholder="Enter Username" name="uname" autofocus required/>
+            <input type="password" placeholder="Enter Password" name="psw" required/>
             <!-- <div class="left">
               <input type="checkbox" checked="checked" name="remember" />Remember me
             </div> -->
-            <div class="right">Forgot <a href="javascript:void(0)" class="loginLink">password?</a></div>
+          <div class="inputBox">
+            Forgot <a href="javascript:void(0)" class="link">password?</a>
           </div>
-          <input type="button" value="Login"></input>
+          <input class="button" type="button" value="Login"></input>
+          </div>
       </form>
     </div>
   </body>

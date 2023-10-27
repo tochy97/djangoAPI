@@ -1,9 +1,3 @@
-.container {
-    text-decoration: none;
-    text-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
+.button {
+    width: 9em;
 }

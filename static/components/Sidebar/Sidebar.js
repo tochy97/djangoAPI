@@ -16,6 +16,7 @@ document.addEventListener("click", (event) => {
         // This is a click outside.      
         closeSidebar();
 })
+
 async function openPage (event)
 {
     var page = event.target.innerHTML;
@@ -55,7 +56,7 @@ function closeSidebar ()
     sidebar.style.pointerEvent = "none";
     toggle.style.visibility = "visible";
 
-    let options = document.querySelectorAll('a');
+    let options = sidebar.querySelectorAll('a');
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "hidden";

@@ -20,7 +20,6 @@ a {
     all: unset;
     text-align: center;
     width: inherit;
-    color: white;
 }
 
 hr {
@@ -34,6 +33,7 @@ input {
 input[type="text"], input[type="password"] {
     padding: 7px;
     border: 2px solid rgb(150, 150, 150);
+    width: 10em;
     border-radius: 5px;
 }
 
