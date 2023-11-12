@@ -9,6 +9,8 @@
     <body onload="StartApp()">
         <script type="text/javascript" src="{% static 'components/common/js/index.js' %}"></script>
         <form name="main">
+            <input type="hidden" value={} name="data" />
+            <input type="hidden" value="http://127.0.0.1:8000/" name="url" />
             <div name="container">
                 <div id="nav" class="nav"></div>
                 <div id="content" class="content"></div>

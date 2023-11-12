@@ -1,14 +1,11 @@
 from django.urls import path
 from rest_framework import routers, urlpatterns
-from .views import all_quotes, modify_quote, add_quote
-
-router = routers.DefaultRouter()
-
+from .views import PostListView, DayListView, DataListView, QuoteListView
 
 urlpatterns = [
-    path('allquotes/', all_quotes),
-    path('modifyquote/', modify_quote),
-    path('addquote/', add_quote)
+    path('post/', PostListView.as_view()),
+    path('day/', DayListView.as_view()),
+    path('data/', DataListView.as_view()),
+    path('quote/', QuoteListView.as_view())
 ]
 
-urlpatterns += router.urls

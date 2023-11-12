@@ -5,6 +5,7 @@ from .views import home, current_user, modify_user, send_email
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     path("", home, name="home"),
     path('auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
