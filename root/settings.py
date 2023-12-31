@@ -17,7 +17,6 @@ from pickle import TRUE
 import django
 import environ
 import pymysql
-import rest_framework_simplejwt
 
 pymysql.install_as_MySQLdb()
 env = environ.Env()
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'api',
+    'oauth2_provider',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -72,7 +72,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -173,3 +174,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+LOGIN_URL='/admin/register/'
