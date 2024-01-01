@@ -1,7 +1,7 @@
 import graphene
 
 class UserInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     username = graphene.String()
     email = graphene.String()
     admin = graphene.String()
@@ -9,14 +9,14 @@ class UserInput(graphene.InputObjectType):
     date_update = graphene.DateTime()
 
 class HashInput(graphene.InputObjectType):
-    id = graphene.ID()
-    user = graphene.String()
+    id = graphene.Int()
+    user = UserInput()
     value = graphene.String()
     date_created = graphene.DateTime()
     date_update = graphene.DateTime()
 
 class KeyInput(graphene.InputObjectType):
-    id = graphene.ID()
+    id = graphene.Int()
     value = graphene.String()
     date_created = graphene.DateTime()
     date_update = graphene.DateTime()

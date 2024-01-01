@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-    
 class Setting(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
@@ -14,16 +13,16 @@ class Setting(models.Model):
 
 class Key(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=129)
+    value = models.CharField(max_length=129, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.date_created
+        return self.value
 
 class Hash(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
-    value = models.CharField(max_length=129)
+    value = models.CharField(max_length=129, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField()
 

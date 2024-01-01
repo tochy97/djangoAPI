@@ -1,61 +1,88 @@
 from graphene import ObjectType, Mutation, Field, String, Boolean, ID
 from django.contrib.auth.models import User
+from datetime import datetime
 
 from .models import Setting, Key, Hash
 from .types import UserType, KeyType, HashType
 from .inputs import UserInput, KeyInput, HashInput
 
-class SaveUser(Mutation):
-    user = Field(UserType)
-    #input arguments
-    class Arguments:
-        user_input = UserInput()
-        
-    def mutate(self, info, user_input=None):
-        user=User(
-            id = user_input.id,
-            username = user_input.username,
-            email = user_input.email,
-            admin = user_input.admin,
-            date_created = user_input.date_created,
-        )
-        user.save()
-        ok = True
-        return SaveUser(user=user)
-
-class SaveKey(Mutation):
-    key = Field(KeyType)
-    #input arguments
+class CreateKey(Mutation):
+    
     class Arguments:
         key_input = KeyInput(required=True)
+
+    key = Field(KeyType)
         
-    def mutate(self, info, key_input=None):
-        key=Key(
-            user = key_input.user,
-            value = key_input.value,
-            date_created = key_input.date_created,
+    @classmethod
+    def mutate(cls, root, info, key_input):
+        key = Key(
+            value = key_input.value
         )
         key.save()
-        ok = True
-        return SaveHash(key=key)
+        return CreateKey(key=key)
+    
+class UpdateKey(Mutation):
+    
+    class Arguments:
+        key_input = KeyInput(required=True)
 
-class SaveHash(Mutation):
-    hash = Field(HashType)
-    #input arguments
+    key = Field(KeyType)
+        
+    @classmethod
+    def mutate(cls, root, info, key_input):
+        key = Key.objects.get(pk=key_input.id)
+        key.value = key_input.value
+        key.save()
+        return UpdateKey(key=key)
+    
+class CreateHash(Mutation):
+
     class Arguments:
         hash_input = HashInput(required=True)
+
+    hash = Field(HashType)
         
-    def mutate(self, info, hash_input=None):
+    @classmethod
+    def mutate(cls, root, info, hash_input):
+        now = datetime.now()
         hash=Hash(
             user = hash_input.user,
             value = hash_input.value,
-            date_created = hash_input.date_created,
+            date_update = now
         )
         hash.save()
-        ok = True
-        return SaveHash(hash=hash)
+        return CreateHash(hash=hash)
+    
+class UpdateHash(Mutation):
+    
+    class Arguments:
+        hash_input = HashInput(required=True)
+
+    hash = Field(HashType)
+        
+    @classmethod
+    def mutate(cls, root, info, hash_input):
+        hash = Hash.objects.get(pk=hash_input.id)
+        hash.value = hash_input.value
+        hash.save()
+        return UpdateHash(hash=hash)
+    
+class DeleteHash(Mutation):
+    
+    class Arguments:
+        hash_input = HashInput(required=True)
+
+    hash = Field(HashType)
+        
+    @classmethod
+    def mutate(cls, root, info, hash_input):
+        hash = Hash.objects.get(pk=hash_input.id)
+        hash.delete()
+        return None
     
 class Mutation(ObjectType):
-    save_hash = SaveHash.Field()
-    save_key = SaveKey.Field()
-    save_user = SaveUser.Field()
+    create_key = CreateKey.Field()
+    update_key = UpdateKey.Field()
+    create_hash = CreateHash.Field()
+    update_hash = UpdateHash.Field()
+    delete_hash = DeleteHash.Field()
