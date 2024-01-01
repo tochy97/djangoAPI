@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'graphene_django',
+    'graphql_auth',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'corsheaders',
     'rest_framework',
     'user',
@@ -175,5 +177,20 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 LOGIN_URL='/admin/login/'
 
 GRAPHENE = {
-    "SCHEMA": "root.schema.schema"
+    "SCHEMA": "root.schema.schema",
+    "MIDDLEWARE": [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
+
+GRAPHQL_JWT = {
+    "JWT_ALLOW_ANY_CLASSES": [
+        "graphql_auth_.mutations.Register",
+    ],
+    "JWT_VERIFY_EXPIRATION":True,
+}
+
+AUTHENTICATION_BACKENS = [
+    'graphql_auth.backends.GraphQLAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

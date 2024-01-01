@@ -1,6 +1,8 @@
 from graphene import ObjectType, Mutation, Field, String, Boolean, ID
 from django.contrib.auth.models import User
 from datetime import datetime
+from graphql_auth import mutations
+import graphql_jwt
 
 from .models import Setting, Key, Hash
 from .types import UserType, KeyType, HashType
@@ -86,3 +88,8 @@ class Mutation(ObjectType):
     create_hash = CreateHash.Field()
     update_hash = UpdateHash.Field()
     delete_hash = DeleteHash.Field()
+
+    register = mutations.Register.Field()
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
