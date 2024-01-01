@@ -16,9 +16,7 @@ from pathlib import Path
 from pickle import TRUE
 import django
 import environ
-import pymysql
 
-pymysql.install_as_MySQLdb()
 env = environ.Env()
 environ.Env.read_env()
 
@@ -47,11 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
+    'graphene_django',
     'corsheaders',
     'rest_framework',
-    'api',
-    'oauth2_provider',
+    'user',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -69,11 +67,10 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -175,4 +172,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
-LOGIN_URL='/admin/register/'
+LOGIN_URL='/admin/login/'
+
+GRAPHENE = {
+    "SCHEMA": "root.schema.schema"
+}

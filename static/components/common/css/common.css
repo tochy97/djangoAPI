@@ -37,6 +37,17 @@ input[type="text"], input[type="password"] {
     border-radius: 5px;
 }
 
+input[type="submit"] {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+input[type="submit"] :hover {
+    cursor: pointer;
+}
+
 input[type="button"] {
     padding: 10px;
     background-color: black;
@@ -44,20 +55,6 @@ input[type="button"] {
     border-radius: 5px;
 }
 
-input[type="button"]:hover {
-    border: 2px solid red;
-}
-
-input[type="button"]:hover, a:hover{
+input[type="button"] :hover {
     cursor: pointer;
-    color: red;
-}
-
-input[type="button"]:active {
-    border: 2px solid green;
-}
-
-input[type="button"]:active, a:active{
-    cursor: pointer;
-    color: green;
 }

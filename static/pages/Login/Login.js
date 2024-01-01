@@ -1,20 +1,20 @@
 self = document.forms.main;
 
-async function sendLogin(){
+async function sendLogin() {
     return new Promise ( async (resolve, reject) => {
-        self.data = {
-            username: self.uname.value,
+        self.data.data = {
+            user: self.uname.value,
             password: self.psw.value
         };
-        self.url.value += "auth/"
-        debugger
+        self.url.value = "user/auth/"
         
-        let request = addRequestHandler(true);
-        let res = self.dispatchEvent(request);
-        setCookie("access", res.access, 1);
-        setCookie("refresh", res.refresh, 1);
+        
+        let response = await postData();
         resolve(true);
     })
 }
 
-self.send.onclick = sendLogin;
+self.send.addEventListener("click", function(event) {
+    event.preventDefault()
+    sendLogin();
+});

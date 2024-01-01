@@ -6,3 +6,7 @@ django-mysql
 djangorestframework
 django-oauth-toolkit
 pymysql
+graphene-django
+graphene-mongo
+mongoengine
+mongomock

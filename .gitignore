@@ -9,7 +9,7 @@ media
 .DS_Store
 cjAPI/
 okechAPI/
-
+*migrations/
 # Backup files # 
 *.bak 
 
