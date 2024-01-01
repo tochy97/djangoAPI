@@ -1,17 +1,19 @@
-from graphene import List, ObjectType
+from graphene import List, ObjectType, Field, Int 
 from django.contrib.auth.models import User
 
 from .models import Setting, Key, Hash
 from .types import UserType, KeyType, HashType
         
 class Query(ObjectType):
-    all_Hash = List(HashType)
-    def resolve_all_Hash(root, info):
-        return Hash.objects.all()
-    
-    all_Key = List(HashType)
+    get_Hash = Field(HashType, id=Int())
+    def resolve_get_Hash(root, info, id):
+        return Hash.objects.get(pk=id)
 
-    all_User = List(UserType)
-    def resolve_all_user(root, info):
-        return User.objects.all()
+    get_Key = Field(KeyType, id=Int())
+    def resolve_get_Key(root, info, id):
+        return Key.objects.get(pk=id)
+    
+    get_User = Field(UserType, id=Int())
+    def resolve_get_User(root, info, id):
+        return User.objects.get(pk=id)
     
