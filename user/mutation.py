@@ -1,4 +1,4 @@
-from graphene import Mutation, Field, String, Boolean, ID
+from graphene import ObjectType, Mutation, Field, String, Boolean, ID
 from django.contrib.auth.models import User
 
 from .models import Setting, Key, Hash
@@ -54,3 +54,8 @@ class SaveHash(Mutation):
         hash.save()
         ok = True
         return SaveHash(hash=hash)
+    
+class Mutation(ObjectType):
+    save_hash = SaveHash.Field()
+    save_key = SaveKey.Field()
+    save_user = SaveUser.Field()
