@@ -1,4 +1,5 @@
 const url = (dir = "", name = "") => "/static/" + dir + "/" + name + "/" + name;
+const requestUrl = (dir = "", name = "") => "/static/" + dir + "/" + name + "/requests";
 
 async function StartApp()
 {
@@ -28,17 +29,24 @@ async function loadContent ( dir = "", name = "", container = "" )
         oldScript.remove();
     }
     content.scriptSrc = loadScript( url(dir, name), container );
+    // load request
+    oldScript = document.getElementById("contentRequestScript")
+    if (oldScript) 
+    {
+        oldScript.remove();
+    }
+    content.requestSrc = loadScript( requestUrl(dir, name), container, "Request");
 
     return content;
 }
 
-function loadScript ( url = "", container = "" )
+function loadScript ( url = "", container = "", name = "" )
 {
     let scriptSrc = url + ".js";
     // create script and set type
     var script = document.createElement("script")
     script.type = "text/javascript";
-    script.id = container + "Script"
+    script.id = container + name + "Script"
     
     // set src
     script.setAttribute("src", scriptSrc);
@@ -58,7 +66,7 @@ function loadScript ( url = "", container = "" )
 
 async function postData () 
 {
-    let url = self.url.value;
+    let url = self.url.value;debugger
     // Default options are marked with *
     const response = await fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.

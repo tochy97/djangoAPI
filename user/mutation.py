@@ -5,8 +5,8 @@ from graphql_auth import mutations
 import graphql_jwt
 
 from .models import Setting, Key, Hash
-from .types import UserType, KeyType, HashType
-from .inputs import UserInput, KeyInput, HashInput
+from .types import KeyType, HashType
+from .inputs import KeyInput, HashInput
 
 class CreateKey(Mutation):
     
@@ -64,6 +64,9 @@ class UpdateHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.value = hash_input.value
         hash.save()
@@ -78,6 +81,9 @@ class DeleteHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.delete()
         return None

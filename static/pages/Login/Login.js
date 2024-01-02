@@ -2,12 +2,8 @@ self = document.forms.main;
 
 async function sendLogin() {
     return new Promise ( async (resolve, reject) => {
-        self.data.data = {
-            user: self.uname.value,
-            password: self.psw.value
-        };
-        self.url.value = "user/auth/"
-        
+        self.data.data = loginRequest(self.uname.value, self.psw.value);debugger
+        self.url.value = "user/graphql";
         
         let response = await postData();
         resolve(true);
