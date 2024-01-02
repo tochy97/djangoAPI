@@ -48,7 +48,7 @@ class CreateHash(Mutation):
     def mutate(cls, root, info, hash_input):
         now = datetime.now()
         hash=Hash(
-            user = hash_input.user,
+            user = User.objects.get(pk=hash_input.user),
             value = hash_input.value,
             date_update = now
         )

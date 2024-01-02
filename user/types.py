@@ -7,7 +7,6 @@ class UserType(DjangoObjectType):
         model = User
         fields = '__all__'
 
-
 class HashType(DjangoObjectType):
     class Meta:
         model = Hash

@@ -10,7 +10,7 @@ class UserInput(graphene.InputObjectType):
 
 class HashInput(graphene.InputObjectType):
     id = graphene.Int()
-    user = UserInput()
+    user = graphene.Int()
     value = graphene.String()
     date_created = graphene.DateTime()
     date_update = graphene.DateTime()
