@@ -1,26 +1,8 @@
-document.addEventListener("click", (event) => {
-    let form = document.forms.main
-    let sidebar = form.elements.sidebar;
-    let toggle = form.elements.toggle;
-
-    let eventTarget = event.target; // clicked element    
-
-    do {
-      if(eventTarget == sidebar || eventTarget == toggle) {
-        // This is a click inside, does nothing, just return.
-        return;
-      }
-      // Go up the DOM
-        eventTarget = eventTarget.parentNode;
-    } while (eventTarget);
-        // This is a click outside.      
-        closeSidebar();
-})
-
 function createOption (name) {
     var object = document.createElement("a");
     object.href = "javascript:void(0)";
     object.innerHTML = name;
+    object.id ="sideButton";
     switch (name) {
         case "Logout" :
             object.onclick = () => {
@@ -29,13 +11,38 @@ function createOption (name) {
             };
             break;
         default:
-            object.class="sideButton";
             break;
     }
     return object;
 }
 
 async function StartSidebar () {
+    document.addEventListener("click", (event) => {
+        let form = document.forms.main
+        let sidebar = form.elements.sidebar;
+        let toggle = form.elements.toggle;
+        let closeSidebarButton = document.getElementsByName("closeSidebarButton");
+        let eventTarget = event.target; // clicked element    
+    
+        do {
+          if(eventTarget == sidebar) {
+            // This is a click inside, does nothing, just return.
+            return;
+          }
+          if(eventTarget == toggle) {
+            openSidebar();
+            return;
+          }
+          if(eventTarget == closeSidebarButton) {
+            openSidcloseSidebarebar();
+            return;
+          }
+          // Go up the DOM
+            eventTarget = eventTarget.parentNode;
+        } while (eventTarget);
+            // This is a click outside.      
+            closeSidebar();
+    })
     let options = document.getElementById("options");
     if (await verify()) {
         options.appendChild(createOption("Settings"));
@@ -45,6 +52,7 @@ async function StartSidebar () {
         options.appendChild(createOption("Login"));
         options.appendChild(createOption("Register"));
     }
+    closeSidebar();
 }
 
 async function openPage (event)
@@ -64,7 +72,7 @@ function openSidebar ()
     sidebar.style.pointerEvent = "auto";
     toggle.style.visibility = "hidden";
 
-    let options = document.querySelectorAll('.a');
+    let options = document.querySelectorAll('#sideButton');
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "visible";

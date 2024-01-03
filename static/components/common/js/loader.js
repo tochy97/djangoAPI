@@ -16,17 +16,18 @@ async function loadContent ( dir = "", name = "", container = "", fnCallback = "
         content.scriptSrc = await loadScript( url(dir, name), container );
         // if it loads and return the element
         content.scriptSrc.addEventListener("load", () => {
+            console.log(name + ": Fully loaded.")
             try {
-                console.log(name, " loaded.")
                 eval(fnCallback)
+                console.log(name + ": Initialized.")
             }
             catch {
-                console.log(name, " has no valid initializer.")
+                console.log(name + " has no valid initializer.")
             }
         });
     
         content.scriptSrc.addEventListener("error", (err) => {
-            console.log("Error on loading file", err);
+            console.log(name + " :Error on loading file", err);
         });
         // load request
         oldScript = document.getElementById("contentRequestScript")
@@ -37,11 +38,11 @@ async function loadContent ( dir = "", name = "", container = "", fnCallback = "
         content.requestSrc = await loadScript( requestUrl(dir, name), container, "Request");
         // if it loads and return the element
         content.requestSrc.addEventListener("load", () => {
-            console.log(name, " request loaded.");
+            console.log(name + ": Requests fully loaded.");
         });
     
         content.requestSrc.addEventListener("error", (err) => {
-            console.log("Error on loading file", err);
+            console.log(name + " :Error on loading file", err);
         });
         resolve(content);
     })
