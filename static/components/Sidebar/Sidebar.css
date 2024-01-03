@@ -24,13 +24,18 @@ body{
 .sidebar a {
     padding: 20px 25px;
     font-size: 17px;
+    text-align: center;
+    width: inherit;
+    color: white;
 }
 
 .sidebar a .current{
     padding: 20px 25px;
     font-size: 17px;
 }
-
+.sidebar a:hover {
+    color: rgb(139, 220, 255);
+}
 .options {
     display: flex;
     flex-direction: column;

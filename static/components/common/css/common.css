@@ -18,9 +18,6 @@ object {
 
 a {
     all: unset;
-    text-align: center;
-    width: inherit;
-    color: white;
 }
 
 hr {

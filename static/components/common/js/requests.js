@@ -8,4 +8,13 @@ const verifyRequest = (data) => ({
     "variables": {token: data}
   })
   
+  const logout = (input) => ({
+    "query": `mutation RevokeToken($data: String!){ 
+        revokeToken(refreshToken: $data) 
+        { 
+          payload refreshExpiresIn token 
+        }
+      }`,
+    "variables": {data: input}
+  })
   

@@ -20,7 +20,6 @@ document.addEventListener("click", (event) => {
 function createOption (name) {
     var object = document.createElement("a");
     object.href = "javascript:void(0)";
-    object.class="sideButton";
     object.innerHTML = name;
     switch (name) {
         case "Logout" :
@@ -30,6 +29,7 @@ function createOption (name) {
             };
             break;
         default:
+            object.class="sideButton";
             break;
     }
     return object;
@@ -64,11 +64,11 @@ function openSidebar ()
     sidebar.style.pointerEvent = "auto";
     toggle.style.visibility = "hidden";
 
-    let options = document.querySelectorAll('a');
+    let options = document.querySelectorAll('.a');
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "visible";
-        if (i > 0)
+        if (i > 0 && options[i].name !== "Logout")
         {
             options[i].addEventListener('click', openPage);
         }

@@ -187,7 +187,9 @@ GRAPHQL_JWT = {
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth_.mutations.Register",
     ],
-    "JWT_VERIFY_EXPIRATION":True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=1),
 }
 
 AUTHENTICATION_BACKENS = [
