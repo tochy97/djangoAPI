@@ -1,21 +1,3 @@
-function createOption (name) {
-    var object = document.createElement("a");
-    object.href = "javascript:void(0)";
-    object.innerHTML = name;
-    object.id ="sideButton";
-    switch (name) {
-        case "Logout" :
-            object.onclick = () => {
-                eraseCookie("data");
-                location.reload();
-            };
-            break;
-        default:
-            break;
-    }
-    return object;
-}
-
 async function StartSidebar () {
     document.addEventListener("click", (event) => {
         let form = document.forms.main
@@ -45,14 +27,32 @@ async function StartSidebar () {
     })
     let options = document.getElementById("options");
     if (await verify()) {
-        options.appendChild(createOption("Settings"));
         options.appendChild(createOption("Logout"));
     }
     else {
         options.appendChild(createOption("Login"));
         options.appendChild(createOption("Register"));
     }
+    options.appendChild(createOption("Settings"));
     closeSidebar();
+}
+
+function createOption (name) {
+    var object = document.createElement("a");
+    object.href = "javascript:void(0)";
+    object.innerHTML = name;
+    object.id ="sideButton";
+    switch (name) {
+        case "Logout" :
+            object.onclick = () => {
+                eraseCookie("data");
+                location.reload();
+            };
+            break;
+        default:
+            break;
+    }
+    return object;
 }
 
 async function openPage (event)

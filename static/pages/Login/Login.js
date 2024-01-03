@@ -10,16 +10,14 @@ async function sendLogin() {
     }
     self.data.data = loginRequest(self.uname.value, self.psw.value);
         
-    let response = await postData();
-    try {
+    postData().then( response => {
         setCookie("data", response.data.tokenAuth.token, 1);
-    }
-    catch {
-        alert("Invalid username or password!")
-    }
-    finally {
-        location.reload();
-    }
+    }).catch((err) =>{
+        console.log(err)
+        alert("Invalid username or password!");
+    }).finally(() =>{
+        location.reload()
+    });
 }
 
 let self = document.forms.main;
