@@ -17,6 +17,36 @@ document.addEventListener("click", (event) => {
         closeSidebar();
 })
 
+function createOption (name) {
+    var object = document.createElement("a");
+    object.href = "javascript:void(0)";
+    object.class="sideButton";
+    object.innerHTML = name;
+    switch (name) {
+        case "Logout" :
+            object.onclick = () => {
+                eraseCookie("data");
+                location.reload();
+            };
+            break;
+        default:
+            break;
+    }
+    return object;
+}
+
+async function StartSidebar () {
+    let options = document.getElementById("options");
+    if (await verify()) {
+        options.appendChild(createOption("Settings"));
+        options.appendChild(createOption("Logout"));
+    }
+    else {
+        options.appendChild(createOption("Login"));
+        options.appendChild(createOption("Register"));
+    }
+}
+
 async function openPage (event)
 {
     var page = event.target.innerHTML;

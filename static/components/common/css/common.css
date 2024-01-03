@@ -20,6 +20,7 @@ a {
     all: unset;
     text-align: center;
     width: inherit;
+    color: white;
 }
 
 hr {
@@ -30,7 +31,7 @@ input {
     all: unset;
 }
 
-input[type="text"], input[type="password"], input[type="textarea"] {
+input[type="text"], input[type="password"], input[type="textarea"], input[type="date"] {
     padding: 7px;
     border: 2px solid rgb(150, 150, 150);
     background-color: rgb(255, 255, 255);
@@ -38,10 +39,10 @@ input[type="text"], input[type="password"], input[type="textarea"] {
     border-radius: 5px;
 }
 
-input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus, input[type="textarea"]:hover, input[type="textarea"]:focus {
+input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus, input[type="textarea"]:hover, input[type="textarea"]:focus, input[type="date"]:hover, input[type="date"]:focus {
     background-color: rgb(235, 249, 255);
 }
-input[type="submit"], input[type="button"]  {
+input[type="submit"], input[type="button"] {
     padding: 10px;
     background-color: black;
     color: white;

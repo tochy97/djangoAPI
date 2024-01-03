@@ -1,87 +1,49 @@
 const url = (dir = "", name = "") => "/static/" + dir + "/" + name + "/" + name;
 const requestUrl = (dir = "", name = "") => "/static/" + dir + "/" + name + "/requests";
-
 async function StartApp()
 {
-    let self =  document.forms.main;
-
-    return new Promise( async (resolve, reject) => {
-        // load in sidebar
-        let sidebar = await loadContent( "components", "Sidebar", "nav");
-        // load in content
+    if (await verify()) {
+        let content = await loadContent( "pages", "Settings", "content");
+    }
+    else {
         let content = await loadContent( "pages", "Login", "content");
-        resolve(true);
-    })
-}   
-
-async function loadContent ( dir = "", name = "", container = "" )
-{
-    let htmlSrc = url(dir, name) + ".html";
-
-    let content = document.getElementById(container);
-
-    // load html as text into content
-    content.innerHTML = await (await fetch(htmlSrc)).text();
-    // load script
-    let oldScript = document.getElementById("contentScript")
-    if (oldScript) 
-    {
-        oldScript.remove();
     }
-    content.scriptSrc = loadScript( url(dir, name), container );
-    // load request
-    oldScript = document.getElementById("contentRequestScript")
-    if (oldScript) 
-    {
-        oldScript.remove();
-    }
-    content.requestSrc = loadScript( requestUrl(dir, name), container, "Request");
-
-    return content;
+    // load in sidebar
+    let sidebar = await loadContent( "components", "Sidebar", "nav", "StartSidebar()");
+    // load in content
 }
 
-function loadScript ( url = "", container = "", name = "" )
+async function verify ()
 {
-    let scriptSrc = url + ".js";
-    // create script and set type
-    var script = document.createElement("script")
-    script.type = "text/javascript";
-    script.id = container + name + "Script"
-    
-    // set src
-    script.setAttribute("src", scriptSrc);
-    document.body.prepend(script);
-
-    // if it loads and return the element
-    script.addEventListener("load", () => {
-        script.onreadystatechange = function () {
-            return script;
-        }
-    });
-
-    script.addEventListener("error", () => {
-        return null;
-    });
+    let self = document.forms.main;
+    let data = getCookie("data")
+    self.data.data = verifyRequest(data);
+    self.url.value = "user/graphql";
+    let response = await postData();
+    return loadUser(response.data);
 }
 
 async function postData () 
 {
-    let url = self.url.value;debugger
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-        "Content-Type": "application/json",
-        // "Header" : access
-        },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(self.data.data), // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
+    return new Promise ( async (resolve, reject) => {
+        let self = document.forms.main;
+        let url = self.url.value;
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+            "Content-Type": "application/json",
+            // "Header" : access
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(self.data.data), // body data type must match "Content-Type" header
+        });
+        resolve(response.json());
+    })
 }
 
 function setCookie(name,value,days) {
