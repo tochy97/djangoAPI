@@ -33,7 +33,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    env('DJANGO_ALLOWED_HOSTS'),
+]
 
 SECURE_SSL_REDIRECT = False
 
@@ -54,7 +56,19 @@ INSTALLED_APPS = [
     'user',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+r"^https://\w+\.domain\.com$",
+]
+
+CORS_ALLOW_METHODS = [
+'POST',
+]
+CORS_ALLOWED_ORIGINS = [
+    env('CORS_ALLOWED_ORIGINS'),
+]
+CORS_URLS_REGEX = r'^/graphql/.*$'
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -20,7 +20,7 @@ async function verify ()
     self.data.data = verifyRequest(data);
     self.url.value = "graphql";
     let response = await postData();
-    return loadUser(response.data);
+    return loadUser(response?.data);
 }
 
 async function postData () 
@@ -34,30 +34,29 @@ async function postData ()
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "same-origin", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
+            credentials: "include", // include, *same-origin, omit
             headers: {
             "Content-Type": "application/json",
             "X-CSRFToken" : csrftoken,
             },
             redirect: "follow", // manual, *follow, error
-            referrerPolicy: "same-origin", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(self.data.data), // body data type must match "Content-Type" header
         });
-        
-        resolve(response.json());
+        let output = await parseResponse(response)
+        resolve(output);
     })
 }
 
-function parseResponse (response) {
-    try {
+async function parseResponse (response) {
+    return new Promise ( async (resolve, reject) => {
+        response.json().then((res) => {
+            resolve(res);
+        }).catch(() =>{
+            reject(null);
+        })
+    })
 
-    }
-    catch {
-
-    }
-    finally {
-
-    }
 }
 
 function setCookie(name,value,days) {

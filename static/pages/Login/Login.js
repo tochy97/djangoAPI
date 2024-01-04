@@ -9,9 +9,9 @@ async function sendLogin() {
         return alert("Password is required!")
     }
     self.data.data = loginRequest(self.uname.value, self.psw.value);
-        
+
     postData().then( response => {
-        setCookie("data", response.data.tokenAuth.token, 1);
+        setCookie("data", response?.data.tokenAuth.token, 1);
     }).catch((err) =>{
         console.log(err)
         alert("Invalid username or password!");
