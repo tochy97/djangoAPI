@@ -11,7 +11,7 @@ class MessageInput(graphene.InputObjectType):
     owner = graphene.Int()
     chatbox = graphene.Int()
     value = graphene.String()
-    users = graphene.List(graphene.Int)
+    users = graphene.List(ChatboxInput)
 
 class HashInput(graphene.InputObjectType):
     chatbox = graphene.Int()

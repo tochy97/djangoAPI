@@ -65,8 +65,8 @@ class UpdateHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.value = hash_input.value
@@ -82,8 +82,8 @@ class DeleteHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.delete()
@@ -118,8 +118,8 @@ class UpdateNotification(Mutation):
         
     @classmethod
     def mutate(cls, root, info, notification_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         notification = Notification.objects.get(pk=notification_input.id)
         notification.viewed = notification_input.viewed
@@ -135,8 +135,8 @@ class DeleteNotification(Mutation):
         
     @classmethod
     def mutate(cls, root, info, notification_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         notification = Notification.objects.get(pk=notification_input.id)
         notification.delete()
@@ -152,6 +152,9 @@ class CreateMessage(Mutation):
         
     @classmethod
     def mutate(cls, root, info, message_input):
+        auth = info.context.user
+        if not auth.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         now = datetime.now()
         chatbox = Chatbox.objects.get(pk=message_input.chatbox)
         owner = User.objects.get(pk=message_input.owner)
@@ -160,6 +163,7 @@ class CreateMessage(Mutation):
             chatbox = Chatbox.objects.get(pk=message_input.chatbox),
             value = message_input.value,
         )
+
         # Create notification
         for user in message_input.users:
             reciever = User.objects.get(pk=user)
@@ -182,8 +186,8 @@ class UpdateMessage(Mutation):
         
     @classmethod
     def mutate(cls, root, info, message_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         message = Message.objects.get(pk=message_input.id)
         message.value = message_input.value
@@ -199,8 +203,8 @@ class DeleteMessage(Mutation):
         
     @classmethod
     def mutate(cls, root, info, message_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         message = Message.objects.get(pk=message_input.id)
         message.delete()
@@ -219,14 +223,26 @@ class CreateChatbox(Mutation):
         now = datetime.now()
         owner = User.objects.get(pk=chatbox_input.owner)
         users = []
-        for user in chatbox_input.users:
-            users.append(user)
+
         chatbox=Chatbox(
             owner = owner,
-            users = users,
-            value = chatbox_input.value,
         )
         chatbox.save()
+
+        # Add users
+        for user in chatbox_input.users:
+            addMe = User.objects.get(pk=user)
+            chatbox.users.add(addMe.id)
+
+        # Create notification
+        for user in chatbox_input.users:
+            reciever = User.objects.get(pk=user)
+            notificatoin = Notification(
+                owner = reciever,
+                value = "New message from: " + owner.username,
+                chatbox = chatbox
+            )
+            notificatoin.save()
 
         return CreateChatbox(chatbox=chatbox)
     
@@ -239,8 +255,8 @@ class UpdateChatbox(Mutation):
         
     @classmethod
     def mutate(cls, root, info, chatbox_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         users = []
         for user in chatbox_input.users:
@@ -259,8 +275,8 @@ class DeleteChatbox(Mutation):
         
     @classmethod
     def mutate(cls, root, info, chatbox_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         chatbox = Chatbox.objects.get(pk=chatbox_input.id)
         chatbox.delete()

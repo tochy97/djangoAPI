@@ -63,8 +63,8 @@ class UpdateHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.value = hash_input.value
@@ -80,8 +80,8 @@ class DeleteHash(Mutation):
         
     @classmethod
     def mutate(cls, root, info, hash_input):
-        user = info.context.user
-        if not user.is_authenticated:
+        auth = info.context.user
+        if not auth.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         hash = Hash.objects.get(pk=hash_input.id)
         hash.delete()
