@@ -13,7 +13,7 @@ async function StartApp()
     // load in content
 }
 
-async function verify ()
+async function verify()
 {
     let self = document.forms.main;
     let data = getCookie("data")
@@ -23,7 +23,7 @@ async function verify ()
     return loadUser(response?.data);
 }
 
-async function postData () 
+async function postData() 
 {
     return new Promise ( async (resolve, reject) => {
         let self = document.forms.main;
@@ -48,7 +48,7 @@ async function postData ()
     })
 }
 
-async function parseResponse (response) {
+async function parseResponse(response) {
     return new Promise ( async (resolve, reject) => {
         response.json().then((res) => {
             resolve(res);

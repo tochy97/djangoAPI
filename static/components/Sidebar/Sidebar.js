@@ -26,6 +26,7 @@ async function StartSidebar () {
             closeSidebar();
     })
     let options = document.getElementById("options");
+    options.appendChild(createOption("Home"));
     if (await verify()) {
         options.appendChild(createOption("Logout"));
     }

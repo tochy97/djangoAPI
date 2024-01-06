@@ -48,7 +48,7 @@ class CreateHash(Mutation):
     def mutate(cls, root, info, hash_input):
         now = datetime.now()
         hash=Hash(
-            user = User.objects.get(pk=hash_input.user),
+            owner = User.objects.get(pk=hash_input.owner),
             value = hash_input.value,
             date_update = now
         )
@@ -91,6 +91,7 @@ class DeleteHash(Mutation):
 class Mutation(ObjectType):
     create_key = CreateKey.Field()
     update_key = UpdateKey.Field()
+    
     create_hash = CreateHash.Field()
     update_hash = UpdateHash.Field()
     delete_hash = DeleteHash.Field()

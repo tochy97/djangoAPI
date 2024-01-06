@@ -1,10 +1,11 @@
 from graphene import ObjectType, Schema
 
 import user.schema
-import user.hash
+import message.schema
 
 class Query(
     user.schema.Query, 
+    message.schema.Query, 
     ObjectType
 ):
     # This class will inherit from multiple Queries
@@ -13,6 +14,7 @@ class Query(
 
 class Mutation(
     user.schema.Mutation,
+    message.schema.Mutation,
     ObjectType
 ):
     pass

@@ -54,12 +54,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'user',
+    'message',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-r"^https://\w+\.domain\.com$",
+r"^https://\w+\.*\.com$",
 ]
 
 CORS_ALLOW_METHODS = [
