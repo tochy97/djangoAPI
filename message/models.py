@@ -46,6 +46,7 @@ class Hash(models.Model):
     
 class Notification(models.Model):
     id = models.AutoField(primary_key=True)
+    viewed = models.BooleanField(default=False)
     value = models.TextField(null=True)
     chatbox = models.ForeignKey(Chatbox, default=1, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, default=1, on_delete=models.CASCADE)

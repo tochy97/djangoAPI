@@ -50,7 +50,6 @@ class CreateHash(Mutation):
         hash=Hash(
             owner = User.objects.get(pk=hash_input.owner),
             value = hash_input.value,
-            date_update = now
         )
         hash.save()
         return CreateHash(hash=hash)

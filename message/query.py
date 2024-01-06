@@ -27,6 +27,6 @@ class Query(UserQuery, MeQuery, ObjectType):
     def resolve_get_Message(root, info, id):
         return Message.objects.get(pk=id)
     
-    get_Message = Field(NotificationType, id=Int())
+    get_Notification = Field(NotificationType, id=Int())
     def resolve_get_Notification(root, info, id):
         return Notification.objects.get(pk=id)
