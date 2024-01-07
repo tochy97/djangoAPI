@@ -161,6 +161,7 @@ class CreateMessage(Mutation):
         message=Message(
             owner = User.objects.get(pk=message_input.owner),
             chatbox = Chatbox.objects.get(pk=message_input.chatbox),
+            count = message_input.count,
             value = message_input.value,
         )
 
@@ -220,9 +221,11 @@ class CreateChatbox(Mutation):
         
     @classmethod
     def mutate(cls, root, info, chatbox_input):
+        auth = info.context.user
+        if not auth.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         now = datetime.now()
         owner = User.objects.get(pk=chatbox_input.owner)
-        users = []
 
         chatbox=Chatbox(
             owner = owner,
@@ -239,7 +242,7 @@ class CreateChatbox(Mutation):
             reciever = User.objects.get(pk=user)
             notificatoin = Notification(
                 owner = reciever,
-                value = "New message from: " + owner.username,
+                value = "New chat from: " + owner.username,
                 chatbox = chatbox
             )
             notificatoin.save()

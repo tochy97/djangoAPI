@@ -8,42 +8,40 @@ async function loadContent ( dir = "", name = "", container = "", fnCallback = "
         // load html as text into content
         content.innerHTML = await (await fetch(htmlSrc)).text();
         // load script
-        let oldScript = document.getElementById("contentScript")
-        if (oldScript) 
+        let oldScript = document.getElementById("content" + name + "Script");
+        if (oldScript === null) 
         {
-            oldScript.remove();
+            content.scriptSrc = await loadScript( url(dir, name), container, name );
+            // if it loads and return the element
+            content.scriptSrc.addEventListener("load", () => {
+                console.log(name + ": Fully loaded.")
+                try {
+                    eval(fnCallback)
+                    console.log(name + ": Initialized.")
+                }
+                catch {
+                    console.log(name + " has no valid initializer.")
+                }
+            });
+            content.scriptSrc.addEventListener("error", (err) => {
+                console.log(name + " :Error on loading file", err);
+            });
         }
-        content.scriptSrc = await loadScript( url(dir, name), container );
-        // if it loads and return the element
-        content.scriptSrc.addEventListener("load", () => {
-            console.log(name + ": Fully loaded.")
-            try {
-                eval(fnCallback)
-                console.log(name + ": Initialized.")
-            }
-            catch {
-                console.log(name + " has no valid initializer.")
-            }
-        });
     
-        content.scriptSrc.addEventListener("error", (err) => {
-            console.log(name + " :Error on loading file", err);
-        });
         // load request
-        oldScript = document.getElementById("contentRequestScript")
-        if (oldScript) 
+        oldScript = document.getElementById("content" + name + "RequestScript");
+        if (oldScript === null) 
         {
-            oldScript.remove();
+            content.requestSrc = await loadScript( requestUrl(dir, name), container, name + "Request");
+            // if it loads and return the element
+            content.requestSrc.addEventListener("load", () => {
+                console.log(name + ": Requests fully loaded.");
+            });
+        
+            content.requestSrc.addEventListener("error", (err) => {
+                console.log(name + " :Error on loading file", err);
+            });
         }
-        content.requestSrc = await loadScript( requestUrl(dir, name), container, "Request");
-        // if it loads and return the element
-        content.requestSrc.addEventListener("load", () => {
-            console.log(name + ": Requests fully loaded.");
-        });
-    
-        content.requestSrc.addEventListener("error", (err) => {
-            console.log(name + " :Error on loading file", err);
-        });
         resolve(content);
     })
 }

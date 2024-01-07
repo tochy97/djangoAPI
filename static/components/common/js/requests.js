@@ -8,7 +8,7 @@ const verifyRequest = (data) => ({
     "variables": {token: data}
   })
   
-  const logout = (input) => ({
+const logout = (input) => ({
     "query": `mutation RevokeToken($data: String!){ 
         revokeToken(refreshToken: $data) 
         { 
@@ -16,5 +16,5 @@ const verifyRequest = (data) => ({
         }
       }`,
     "variables": {data: input}
-  })
+})
   

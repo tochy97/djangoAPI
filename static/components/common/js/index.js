@@ -2,15 +2,16 @@ const url = (dir = "", name = "") => "/static/" + dir + "/" + name + "/" + name;
 const requestUrl = (dir = "", name = "") => "/static/" + dir + "/" + name + "/requests";
 async function StartApp()
 {
+    // load in content
     if (await verify()) {
-        let content = await loadContent( "pages", "Settings", "content");
+        await loadContent( "pages", "Settings", "content");
     }
     else {
-        let content = await loadContent( "pages", "Login", "content");
+        await loadContent( "pages", "Login", "content");
     }
-    // load in sidebar
-    let sidebar = await loadContent( "components", "Sidebar", "nav", "StartSidebar()");
-    // load in content
+    // load in components
+    await loadContent( "components", "Sidebar", "nav", "StartSidebar()");
+    await loadContent( "components", "Quick", "quick", "StartQuick()");
 }
 
 async function verify()

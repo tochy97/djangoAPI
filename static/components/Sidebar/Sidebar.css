@@ -14,11 +14,13 @@ body{
     background-color: #111;
     top: 0;
     left: 0;
-    width: 0px;
     overflow: hidden;
     height: 100%;
     transition: 0.5s;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sidebar a {
@@ -35,10 +37,6 @@ body{
 }
 .sidebar a:hover {
     color: rgb(139, 220, 255);
-}
-.options {
-    display: flex;
-    flex-direction: column;
 }
 
 .sideButton {

@@ -26,6 +26,7 @@ class Chatbox(models.Model):
 
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
+    count = models.IntegerField(unique=False)
     owner = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     chatbox = models.ForeignKey(Chatbox, default=1, on_delete=models.CASCADE)
     value = models.TextField(null=True)

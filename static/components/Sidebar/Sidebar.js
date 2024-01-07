@@ -1,7 +1,8 @@
 async function StartSidebar () {
+    let form = document.forms.main;
+
+    let sidebar = form.elements.sidebar;
     document.addEventListener("click", (event) => {
-        let form = document.forms.main
-        let sidebar = form.elements.sidebar;
         let toggle = form.elements.toggle;
         let closeSidebarButton = document.getElementsByName("closeSidebarButton");
         let eventTarget = event.target; // clicked element    
@@ -25,17 +26,26 @@ async function StartSidebar () {
             // This is a click outside.      
             closeSidebar();
     })
-    let options = document.getElementById("options");
-    options.appendChild(createOption("Home"));
+    sidebar.appendChild(createOption("Home"));
     if (await verify()) {
-        options.appendChild(createOption("Logout"));
+        sidebar.appendChild(createOption("Logout"));
     }
     else {
-        options.appendChild(createOption("Login"));
-        options.appendChild(createOption("Register"));
+        sidebar.appendChild(createOption("Login"));
+        sidebar.appendChild(createOption("Register"));
     }
-    options.appendChild(createOption("Settings"));
+    sidebar.appendChild(createOption("Settings"));
+    
+    let options = sidebar.querySelectorAll('a, hr');
+    for (var i = 0; i < options.length; i++) 
+    {
+        if (i > 0 && options[i].name !== "Logout") 
+        {
+            options[i].addEventListener('click', openPage);
+        }
+    }
     closeSidebar();
+    return;
 }
 
 function createOption (name) {
@@ -69,19 +79,15 @@ function openSidebar ()
     let sidebar = form.elements.sidebar;
     let toggle = form.elements.toggle;
 
-    sidebar.style.width = "20%";
     sidebar.style.pointerEvent = "auto";
     toggle.style.visibility = "hidden";
 
-    let options = document.querySelectorAll('#sideButton');
+    let options = sidebar.querySelectorAll('a, hr');
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "visible";
-        if (i > 0 && options[i].name !== "Logout")
-        {
-            options[i].addEventListener('click', openPage);
-        }
     }
+    sidebar.style.width = "auto";
 }
 
 function closeSidebar ()
@@ -91,13 +97,13 @@ function closeSidebar ()
     let sidebar = form.elements.sidebar;
     let toggle = form.elements.toggle;
 
-    sidebar.style.width = "0px";
     sidebar.style.pointerEvent = "none";
     toggle.style.visibility = "visible";
 
-    let options = sidebar.querySelectorAll('a');
+    let options = sidebar.querySelectorAll('a, hr');
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "hidden";
     }
+    sidebar.style.width = "0px";
 }
