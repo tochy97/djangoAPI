@@ -2,6 +2,9 @@ async function StartSidebar () {
     let form = document.forms.main;
 
     let sidebar = form.elements.sidebar;
+    let hr = document.createElement("hr");
+
+    // Add main outside click event
     document.addEventListener("click", (event) => {
         let toggle = form.elements.toggle;
         let closeSidebarButton = document.getElementsByName("closeSidebarButton");
@@ -17,7 +20,7 @@ async function StartSidebar () {
             return;
           }
           if(eventTarget == closeSidebarButton) {
-            openSidcloseSidebarebar();
+            closeSidebar();
             return;
           }
           // Go up the DOM
@@ -26,16 +29,20 @@ async function StartSidebar () {
             // This is a click outside.      
             closeSidebar();
     })
+
+    // Create options
     sidebar.appendChild(createOption("Home"));
+    sidebar.appendChild(createOption("Settings"));
+    sidebar.appendChild(hr);
     if (await verify()) {
-        sidebar.appendChild(createOption("Logout"));
+        sidebar.appendChild(createOption("Logout"));        
     }
     else {
         sidebar.appendChild(createOption("Login"));
         sidebar.appendChild(createOption("Register"));
     }
-    sidebar.appendChild(createOption("Settings"));
-    
+
+    // Add click event for options
     let options = sidebar.querySelectorAll('a, hr');
     for (var i = 0; i < options.length; i++) 
     {
@@ -58,9 +65,10 @@ function createOption (name) {
             object.onclick = () => {
                 eraseCookie("data");
                 location.reload();
-            };
+            }
             break;
         default:
+            object.classList.add("sideButton");
             break;
     }
     return object;
@@ -87,7 +95,7 @@ function openSidebar ()
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "visible";
     }
-    sidebar.style.width = "auto";
+    sidebar.style.width = "120px";
 }
 
 function closeSidebar ()

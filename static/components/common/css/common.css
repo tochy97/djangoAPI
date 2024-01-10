@@ -1,7 +1,6 @@
 body {
     height: 100%;
     width: 100%;
-    transition: all 0.5s ease-out allow-discrete;
 }
 
 object {
@@ -39,7 +38,7 @@ input[type="text"], input[type="password"], input[type="textarea"], input[type="
 }
 
 input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus, input[type="textarea"]:hover, input[type="textarea"]:focus, input[type="date"]:hover, input[type="date"]:focus {
-    background-color: rgb(235, 249, 255);
+    background-color: rgb(255, 192, 192);
 }
 input[type="submit"], input[type="button"] {
     padding: 10px;
@@ -48,7 +47,13 @@ input[type="submit"], input[type="button"] {
     border-radius: 5px;
 }
 
-input[type="submit"]:hover ,input[type="button"]:hover, a:hover {
+input[type="submit"]:hover ,input[type="button"]:hover {
     cursor: pointer;
-    color: rgb(139, 220, 255);
+    background-color: rgb(255, 0, 0);
+    /* color: rgb(139, 220, 255); */
+}
+
+a:hover {
+    cursor: pointer;
+    color: rgb(255, 0, 0);
 }

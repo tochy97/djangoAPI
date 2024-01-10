@@ -5,16 +5,24 @@
     </head>
 
     <body>
-        <fieldset name="quick" class="quick">
-            <a href="javascript:void(0)" class="quickButton">
-                <img class="quickImage" src="/static/components/common/icons/email.png" />
-            </a>
-            <a href="javascript:void(0)" class="quickButton">
-                <img class="quickImage" src="/static/components/common/icons/message.png" />
-            </a>
-            <a href="javascript:void(0)" class="quickButtonC">
-                <img class="quickImage" src="/static/components/common/icons/notification.png" />
-            </a>
-        </fieldset>
+        <div class="quick">
+            <fieldset name="widget" class="widget">
+                <!-- <a href="javascript:void(0)" class="quickButton">
+                    <img class="quickImage" src="/static/components/common/icons/email.png" />
+                </a> -->
+                <a href="javascript:void(0)" class="quickButton chatButton" onclick="openOptions()">
+                    <img class="quickImage" src="/static/components/common/icons/message.png" />
+                </a>
+                <a href="javascript:void(0)" class="quickButton notificationButton">
+                    <img class="quickImage" src="/static/components/common/icons/notification.png" />
+                </a>
+            </fieldset>
+            <fieldset name="quickOptions" class="quickOptions">
+                <!-- Modal content -->
+                <a href="javascript:void(0)" name="closeChatButton" onclick="closeOptions()">&times;</a>
+            </fieldset>
+            <fieldset name="chatbox" class="chatbox">
+            </fieldset>
+        </div>
     </body>
 </html>

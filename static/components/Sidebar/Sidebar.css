@@ -10,13 +10,14 @@ body{
 }
 
 .sidebar {
+    max-width: 120px;
     position: fixed;
     background-color: #111;
     top: 0;
     left: 0;
     overflow: hidden;
     height: 100%;
-    transition: 0.5s;
+    transition: all 0.5s ease-out allow-discrete;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -36,7 +37,7 @@ body{
     font-size: 17px;
 }
 .sidebar a:hover {
-    color: rgb(139, 220, 255);
+    color: rgb(255, 0, 0);
 }
 
 .sideButton {

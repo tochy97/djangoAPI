@@ -5,13 +5,13 @@ async function StartApp()
     // load in content
     if (await verify()) {
         await loadContent( "pages", "Settings", "content");
+        await loadContent( "components", "Quick", "quick", "StartQuick()");
     }
     else {
         await loadContent( "pages", "Login", "content");
     }
     // load in components
     await loadContent( "components", "Sidebar", "nav", "StartSidebar()");
-    await loadContent( "components", "Quick", "quick", "StartQuick()");
 }
 
 async function verify()
