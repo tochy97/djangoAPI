@@ -52,6 +52,9 @@
     visibility: hidden;
 }
 
+.closeQuickOptions{
+    margin-block: 10px;
+}
 
 .chatbox {
 }

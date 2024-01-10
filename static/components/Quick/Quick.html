@@ -10,16 +10,16 @@
                 <!-- <a href="javascript:void(0)" class="quickButton">
                     <img class="quickImage" src="/static/components/common/icons/email.png" />
                 </a> -->
-                <a href="javascript:void(0)" class="quickButton chatButton" onclick="openOptions()">
+                <a href="javascript:void(0)" class="quickButton chatButton" onclick="openOptions('M')">
                     <img class="quickImage" src="/static/components/common/icons/message.png" />
                 </a>
-                <a href="javascript:void(0)" class="quickButton notificationButton">
+                <a href="javascript:void(0)" class="quickButton notificationButton" onclick="openOptions('N')">
                     <img class="quickImage" src="/static/components/common/icons/notification.png" />
                 </a>
             </fieldset>
             <fieldset name="quickOptions" class="quickOptions">
                 <!-- Modal content -->
-                <a href="javascript:void(0)" name="closeChatButton" onclick="closeOptions()">&times;</a>
+                <a href="javascript:void(0)" name="closeQuickOptions" class="closeQuickOptions" onclick="closeOptions()">&times;</a>
             </fieldset>
             <fieldset name="chatbox" class="chatbox">
             </fieldset>
