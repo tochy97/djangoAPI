@@ -19,15 +19,23 @@
     transition: all 0.5s ease-out allow-discrete;
 }
 
-.quickImage, .quickButton {
+.quickImage, .quickButton, .quickOptionsIconImage, .quickOptionsIcon {
     margin-top: 7px;
     margin-bottom: 7px;
     width: 30px;
     height: 30px;
 }
 
-.quickImage :hover, .quickButton :hover {
-    filter: invert(13%) sepia(97%) saturate(7481%) hue-rotate(356deg) brightness(94%) contrast(111%);
+.chatButton :hover, .chat {
+    filter: invert(12%) sepia(78%) saturate(4255%) hue-rotate(238deg) brightness(121%) contrast(148%);}
+
+.notificationButton :hover, .notification {
+   filter: invert(13%) sepia(97%) saturate(7481%) hue-rotate(356deg) brightness(94%) contrast(111%);
+}
+
+.quickOptionsHeader {
+    visibility: hidden;
+    margin: 0;
 }
 
 .quickOptions {
@@ -56,5 +64,5 @@
     margin-block: 10px;
 }
 
-.chatbox {
+.quickBox {
 }

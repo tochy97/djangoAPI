@@ -4,7 +4,33 @@ function StartQuick() {
     let chat = quick.querySelector(".chat");
     let notification = quick.querySelector(".notification");
 
-    closeOptions();
+    openOptions("N");
+    return;
+}
+
+function loadNotification () {
+    let form = document.forms.main;
+    let widget = form.elements.widget;
+    let quickOptions = form.elements.quickOptions;
+
+    let notificationButton = widget.querySelector(".notificationButton");
+    let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
+
+    quickOptionsHeader.innerHTML = "Notification";
+    notificationButton.style.display = "none";
+    return;
+}
+
+function loadChat () {
+    let form = document.forms.main;
+    let widget = form.elements.widget;
+    let quickOptions = form.elements.quickOptions;
+
+    let chatButton = widget.querySelector(".chatButton");
+    let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
+
+    quickOptionsHeader.innerHTML = "Chat";
+    chatButton.style.display = "none";
     return;
 }
 
@@ -16,22 +42,21 @@ function openOptions (type)
 
     let chatButton = widget.querySelector(".chatButton");
     let notificationButton = widget.querySelector(".notificationButton");
+    let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
     let options = quickOptions.querySelectorAll('a, hr');
 
     if (quickOptions.isOpen === true) {
         closeOptions(type);
     }
 
-    quickOptions.style.visibility = "visible";
     widget.style.marginRight = "100px";
+    quickOptions.style.visibility = "visible";
 
     if (type === "N") {
-        quickOptions.style.borderColor = "rgb(255,0,0)";
-        notificationButton.style.visibility = "hidden";
+        loadNotification();
     }
     else {
-        quickOptions.style.borderColor = "rgb(255,255,0)";
-        chatButton.style.visibility = "hidden";
+        loadChat();
     }
 
     quickOptions.style.height = "100%";
@@ -40,6 +65,7 @@ function openOptions (type)
         options[i].style.visibility = "visible";
     }
 
+    quickOptionsHeader.style.visibility = "visible";
     quickOptions.isOpen = true;
     return;
 }
@@ -53,6 +79,7 @@ function closeOptions (type)
 
     let chatButton = widget.querySelector(".chatButton");
     let notificationButton = widget.querySelector(".notificationButton");
+    let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
     let options = quickOptions.querySelectorAll('a, hr');
 
     chatButton.style.visibility = "visible";
@@ -62,17 +89,14 @@ function closeOptions (type)
 
     quickOptions.style.height = "0%";
 
-    if (type === "N") {
-        chatButton.style.visibility = "visible";
-    }
-    else {
-        notificationButton.style.visibility = "visible";
-    }
+    chatButton.style.display = "";
+    notificationButton.style.display = "";
 
     for (var i = 0; i < options.length; i++) {
         options[i].style.visibility = "hidden";
     }
 
+    quickOptionsHeader.style.visibility = "hidden";
     quickOptions.isOpen = false;
     return;
 }

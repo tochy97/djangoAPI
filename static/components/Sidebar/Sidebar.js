@@ -11,16 +11,15 @@ async function StartSidebar () {
         let eventTarget = event.target; // clicked element    
     
         do {
-          if(eventTarget == sidebar) {
-            // This is a click inside, does nothing, just return.
-            return;
-          }
           if(eventTarget == toggle) {
             openSidebar();
             return;
           }
-          if(eventTarget == closeSidebarButton) {
+          else if(eventTarget == closeSidebarButton) {
             closeSidebar();
+            return;
+          }
+          else {
             return;
           }
           // Go up the DOM
