@@ -198,6 +198,11 @@ GRAPHENE = {
     ],
 }
 
+GRAPHQL_AUTH = {
+    #...
+    "EMAIL_FROM": 'donotreply@email.com'
+}
+
 GRAPHQL_JWT = {
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth_.mutations.Register",

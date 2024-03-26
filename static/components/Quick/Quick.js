@@ -13,11 +13,11 @@ function loadNotification () {
     let widget = form.elements.widget;
     let quickOptions = form.elements.quickOptions;
 
-    let notificationButton = widget.querySelector(".notificationButton");
+    let chatButton = widget.querySelector(".chatButton");
     let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
 
     quickOptionsHeader.innerHTML = "Notification";
-    notificationButton.style.display = "none";
+    chatButton.style.display = "none";
     return;
 }
 
@@ -26,11 +26,11 @@ function loadChat () {
     let widget = form.elements.widget;
     let quickOptions = form.elements.quickOptions;
 
-    let chatButton = widget.querySelector(".chatButton");
+    let notificationButton = widget.querySelector(".notificationButton");
     let quickOptionsHeader = quickOptions.querySelector(".quickOptionsHeader");
 
     quickOptionsHeader.innerHTML = "Chat";
-    chatButton.style.display = "none";
+    notificationButton.style.display = "none";
     return;
 }
 

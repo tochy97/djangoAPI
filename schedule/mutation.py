@@ -4,10 +4,62 @@ from datetime import datetime
 from graphql_auth import mutations
 import graphql_jwt
 
-from .models import Setting, Key, Hash
-from .types import KeyType, HashType
-from .inputs import KeyInput, HashInput
+from .models import Schedule, Key, Hash
+from .types import ScheduleType, KeyType, HashType
+from .inputs import ScheduleInput, KeyInput, HashInput
 
+class CreateSchedule(Mutation):
+
+    class Arguments:
+        schedule_input = ScheduleInput(required=True)
+
+    schedule = Field(ScheduleType)
+        
+    @classmethod
+    def mutate(cls, root, info, schedule_input):
+        now = datetime.now()
+        schedule=Schedule(
+            owner = User.objects.get(pk=schedule_input.owner),
+            value = schedule_input.value,
+            description = schedule_input.description,
+        )
+        schedule.save()
+        return CreateSchedule(schedule=schedule)
+    
+class UpdateSchedule(Mutation):
+    
+    class Arguments:
+        schedule_input = ScheduleInput(required=True)
+
+    schedule = Field(ScheduleType)
+        
+    @classmethod
+    def mutate(cls, root, info, schedule_input):
+        auth = info.context.user
+        if not auth.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
+        schedule = Schedule.objects.get(pk=schedule_input.id)
+        schedule.value = schedule_input.value
+        schedule.description = schedule_input.description
+        schedule.save()
+        return UpdateSchedule(schedule=schedule)
+    
+class DeleteSchedule(Mutation):
+    
+    class Arguments:
+        schedule_input = ScheduleInput(required=True)
+
+    schedule = Field(ScheduleType)
+
+    @classmethod
+    def mutate(cls, root, info, schedule_input):
+        auth = info.context.user
+        if not auth.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
+        schedule = Schedule.objects.get(pk=schedule_input.id)
+        schedule.delete()
+        return None
+    
 class CreateKey(Mutation):
     
     class Arguments:
@@ -94,10 +146,3 @@ class Mutation(ObjectType):
     create_hash = CreateHash.Field()
     update_hash = UpdateHash.Field()
     delete_hash = DeleteHash.Field()
-
-    register = mutations.Register.Field()
-    verify_account = mutations.VerifyAccount.Field()
-    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
-    verify_token = graphql_jwt.Verify.Field()
-    refresh_token = graphql_jwt.Refresh.Field()
-    revoke_token = graphql_jwt.Revoke.Field()
