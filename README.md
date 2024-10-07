@@ -1,6 +1,6 @@
 # djangoAPI
 
-## For ES6 Integration
+## For ES6 Integration - Not yet done
 https://github.com/kottenator/django-compressor-toolkit
 
 ### To build
