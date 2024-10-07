@@ -14,8 +14,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 from pickle import TRUE
-import django
 import environ
+import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -32,6 +32,10 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
 
 ALLOWED_HOSTS = [
     env('DJANGO_ALLOWED_HOSTS'),
@@ -55,7 +59,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'user',
     'message',
+    'compressor_toolkit',
 ]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'compressor_toolkit.precompilers.SCSSCompiler'),
+    ('module', 'compressor_toolkit.precompilers.ES6Compiler'),
+)
+COMPRESS_LOCAL_NPM_INSTALL = False
 
 CORS_ALLOW_ALL_ORIGINS = False
 
@@ -93,22 +104,8 @@ REST_FRAMEWORK = {
 
 ROOT_URLCONF = 'root.urls'
 
-
-# URL prefix for static files.
-STATIC_URL = '/static/'
-
 # Additional locations of static files
-STATICFILES_DIRS = (
-    # location of your application, should not be public web accessible
-    BASE_DIR / 'static',
-)
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, "static"), ]
 
 TEMPLATES = [
     {
@@ -217,4 +214,3 @@ AUTHENTICATION_BACKENS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SECURE_CONTENT_TYPE_NOSNIFF = False

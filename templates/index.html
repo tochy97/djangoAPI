@@ -8,9 +8,13 @@
         <link rel="stylesheet" href="{% static 'components/common/css/common.css' %}" type="text/css" />
     </head>
     <body onload="StartApp()">
-        <script type="text/javascript" src="{% static 'components/common/js/index.js' %}"></script>
-        <script type="text/javascript" src="{% static 'components/common/js/loader.js' %}"></script>
-        <script type="text/javascript" src="{% static 'components/common/js/requests.js' %}"></script>
+        
+        <script type="type=module" src="{% static 'components/common/js/loader.js' %}"></script>
+        <script type="type=module" src="{% static 'components/common/js/requests.js' %}"></script>
+        <script type="type=module" src="{% static 'components/common/js/request_manager.js' %}"></script>
+        <script type="type=module" src="{% static 'components/common/js/cookies_manager.js' %}"></script>
+        <script type="type=module" src="{% static 'components/common/js/index.js' %}"></script>
+
         <form name="main">
             <input type="hidden" value="" name="data" />
             <input type="hidden" value="" name="user" />
