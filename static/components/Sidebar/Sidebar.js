@@ -3,6 +3,7 @@ async function StartSidebar () {
 
     let sidebar = form.elements.sidebar;
     let hr = document.createElement("hr");
+
     // Add main outside click event
     document.addEventListener("click", (event) => {
         let toggle = form.elements.toggle;
@@ -31,9 +32,6 @@ async function StartSidebar () {
     // Create options
     sidebar.appendChild(createOption("Home"));
     sidebar.appendChild(createOption("Settings"));
-    sidebar.appendChild(createOption("Schedule"));
-    sidebar.appendChild(createOption("Appointment"));
-    sidebar.appendChild(createOption("Reciept"));
     sidebar.appendChild(hr);
     if (await verify()) {
         sidebar.appendChild(createOption("Logout"));        

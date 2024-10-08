@@ -1,5 +1,5 @@
 asgiref
-django
+Django
 django-cors-headers
 django-environ
 django-mysql
@@ -9,4 +9,3 @@ pymysql
 graphene-django
 django-graphql-jwt
 django-graphql-auth
-django-compressor-toolkit
