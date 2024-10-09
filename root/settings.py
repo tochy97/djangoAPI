@@ -15,10 +15,6 @@ from datetime import timedelta
 from pathlib import Path
 from pickle import TRUE
 import django
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-^7o37zggonrbf0lqd-txq&cx39d8s$oz_9xb!ny!!^^_*prc2^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -63,9 +59,6 @@ r"^https://\w+\.*\.com$",
 
 CORS_ALLOW_METHODS = [
 'POST',
-]
-CORS_ALLOWED_ORIGINS = [
-    env('CORS_ALLOWED_ORIGINS'),
 ]
 CORS_URLS_REGEX = r'^/graphql/.*$'
 
@@ -179,13 +172,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 LOGIN_URL='/admin/login/'
 
